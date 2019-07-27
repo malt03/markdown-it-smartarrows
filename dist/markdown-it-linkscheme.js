@@ -12,7 +12,7 @@ Based largely on the markdown-it typographer m-dash/n-dash replacements.
 https://github.com/markdown-it/markdown-it/blob/cc8714584282209853fd14e3e0dfb20dfd9c289b/lib/rules_core/replacements.js
 */
 
-var ARROWS_RE = /--|==/;
+var ARROWS_RE = /->|<-|<->|=>|<=|<=>/;
 
 function smartArrows(state) {
   if (state.md.options.smartArrows === false) {
@@ -38,12 +38,12 @@ function doReplacementsInToken(inlineTokens) {
       if (ARROWS_RE.test(token.content)) {
         token.content = token.content
           // The order of these is important -- avoid premature match
-          .replace(/(^|[^<])<-->([^>]|$)/mg, '$1\u2194$2')
-          .replace(/(^|[^-])-->([^>]|$)/mg, '$1\u2192$2')
-          .replace(/(^|[^<])<--([^-]|$)/mg, '$1\u2190$2')
-          .replace(/(^|[^<])<==>([^>]|$)/mg, '$1\u21d4$2')
-          .replace(/(^|[^=])==>([^>]|$)/mg, '$1\u21d2$2')
-          .replace(/(^|[^<])<==([^=]|$)/mg, '$1\u21d0$2');
+          .replace(/(^|[^<])<->([^>]|$)/mg, '$1\u2194$2')
+          .replace(/(^|[^-])->([^>]|$)/mg, '$1\u2192$2')
+          .replace(/(^|[^<])<-([^-]|$)/mg, '$1\u2190$2')
+          .replace(/(^|[^<])<=>([^>]|$)/mg, '$1\u21d4$2')
+          .replace(/(^|[^=])=>([^>]|$)/mg, '$1\u21d2$2')
+          .replace(/(^|[^<])<=([^=]|$)/mg, '$1\u21d0$2');
       }
     }
   }
